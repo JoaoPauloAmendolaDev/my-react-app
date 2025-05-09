@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/dnd-companion/static/css/main.cba40273.css",
-    "main.js": "/dnd-companion/static/js/main.317a6104.js",
-    "index.html": "/dnd-companion/index.html",
-    "main.cba40273.css.map": "/dnd-companion/static/css/main.cba40273.css.map",
-    "main.317a6104.js.map": "/dnd-companion/static/js/main.317a6104.js.map"
+    "main.css": "/my-react-app/static/css/main.cba40273.css",
+    "main.js": "/my-react-app/static/js/main.317a6104.js",
+    "index.html": "/my-react-app/index.html",
+    "main.cba40273.css.map": "/my-react-app/static/css/main.cba40273.css.map",
+    "main.317a6104.js.map": "/my-react-app/static/js/main.317a6104.js.map"
   },
   "entrypoints": [
     "static/css/main.cba40273.css",
