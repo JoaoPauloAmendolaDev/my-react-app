@@ -1,7 +1,7 @@
 {
   "name": "my-react-app",
   "version": "1.0.0",
-  "homepage": "https://joaopauloamendola.github.io/dnd-companion",
+  "homepage": "https://JoaoPauloAmendolaDev.github.io/dnd-companion",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
