@@ -1,0 +1,21 @@
+.nav-btn {
+    background: none;
+    border: none;
+    color: #bfa046;
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    font-weight: normal;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.nav-btn.active {
+    color: #ffd700;
+    font-weight: bold;
+}
+.nav-btn-label {
+    font-size: 12px;
+    margin-top: 2px;
+}

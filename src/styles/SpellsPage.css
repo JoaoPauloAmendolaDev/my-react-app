@@ -1,0 +1,281 @@
+/* Adicione estilos específicos para a página de magias aqui */
+
+.spells-container,
+.spells-container.mobile-no-scroll {
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-height: none;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: none;
+  padding: 1rem 1.5rem 4rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.spells-circle {
+  margin-bottom: 2rem;
+}
+
+.circle-title {
+  color: #ffb347;
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.spells-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.spell-item {
+  padding: 0.7rem 1rem;
+  color: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.spell-item:hover {
+  color: #ffb347;
+  background: rgba(0, 0, 0, 0.3);
+  border-color: #444;
+  transform: translateY(-1px);
+}
+
+.spell-school {
+  color: #888;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+}
+
+/* Scrollbar customization */
+.spells-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.spells-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.spells-container::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.spells-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Carrossel horizontal por círculo */
+.spells-circles-carousel {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.spells-circle-carousel {
+  width: 100%;
+}
+
+.circle-title-carousel {
+  color: #ffb347;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  text-align: left;
+}
+
+.spells-list-carousel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* Garante que as colunas não cresçam além do esperado */
+  gap: 1.5rem 2rem; /* Aumenta espaçamento entre cards */
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.spell-card-carousel {
+  background: rgba(30, 30, 30, 0.92);
+  color: #f5f5f5;
+  border-radius: 7px;
+  padding: 0.8rem 0.5rem; /* Reduz padding vertical */
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.18s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem; /* Reduz espaço entre nome e escola */
+  width: 90%; /* Reduz largura do card */
+  margin: 0 auto; /* Centraliza o card */
+}
+
+.spell-card-carousel:hover {
+  color: #ffb347;
+  border-color: #444;
+  background: rgba(40, 40, 40, 0.95);
+}
+.spell-card-carousel:active, .spell-card-carousel:focus {
+  border-color: #ffb347;
+  box-shadow: 0 0 0 2px #ffb34755;
+}
+.spell-card-name {
+  font-size: 1rem; /* Reduz tamanho da fonte */
+  font-weight: 500;
+  color: #fff;
+}
+
+.spell-card-school {
+  font-size: 0.85rem; /* Reduz tamanho da fonte da escola */
+  color: #ffb347;
+}
+
+/* Dica visual para toque/click */
+.spell-card-carousel::after {
+  content: 'Toque para ver';
+  font-size: 0.7em;
+  color: #ffb347;
+  opacity: 0.7;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+  display: none;
+}
+.spell-card-carousel:focus::after, .spell-card-carousel:hover::after {
+  display: block;
+}
+
+/* Filtros compactos no topo */
+.spells-filters-row {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 1.2rem auto;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.spells-filter-input, .spells-filter-select {
+  background: rgba(30, 30, 30, 0.92);
+  color: #f5f5f5;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  min-width: 120px;
+}
+.spells-filter-input:focus, .spells-filter-select:focus {
+  border-color: #ffb347;
+}
+
+/* Mobile: elimina scroll vertical, limita altura */
+@media (max-width: 600px) {
+  .spells-container,
+  .spells-container.mobile-no-scroll {
+    padding: 0.8rem 1rem 4rem 1rem;
+  }
+  .spells-circles-carousel {
+    width: 100%;
+    flex: 1 1 auto;
+    overflow-y: hidden;
+    gap: 0.7rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .spells-list-carousel {
+    gap: 1rem 1.5rem; /* Ajusta espaçamento para mobile */
+    padding: 0.3rem;
+  }
+  .spell-card-carousel {
+    padding: 0.7rem 0.4rem;
+    width: 95%; /* Um pouco mais largo em mobile */
+  }
+  .spell-card-name {
+    font-size: 0.95rem;
+  }
+  .spell-card-school {
+    font-size: 0.8rem;
+  }
+  .spells-filters-row {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.3rem;
+    margin-bottom: 0.7rem;
+    padding: 0.3rem 0.2rem 0 0.2rem;
+    background: rgba(20,20,20,0.85);
+    border-radius: 8px;
+  }
+  .spells-filter-input, .spells-filter-select {
+    min-width: 80px;
+    font-size: 0.97rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+  }
+  .circle-title-carousel {
+    font-size: 1.02rem;
+    margin: 0.2rem 0 0.3rem 0.2rem;
+    color: #ffb347;
+    text-align: left;
+  }
+}
+
+/* Garante que o conteúdo principal nunca fique cortado por elementos fixos */
+@media (max-width: 900px) {
+  .spells-container {
+    max-height: none;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Remove scroll extra do body */
+body {
+  overflow-y: hidden !important;
+}
+
+/* Ajuste para garantir que o modal de magia fique centralizado e não ultrapasse a tela */
+.SpellModal__overlay {
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding-top: 1.5rem !important;
+}
+
+@media (min-width: 601px) {
+  .spells-container.mobile-no-scroll {
+    max-width: 600px;
+    padding: 0 1.5rem 2.8rem 1.5rem;
+  }
+  .spells-list-carousel {
+    gap: 0.4rem;
+  }
+  .spell-card-carousel {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 0.7rem 0.5rem;
+  }
+}

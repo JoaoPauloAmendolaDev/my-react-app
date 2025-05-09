@@ -1,0 +1,143 @@
+.roll-page-container {
+    width: 100%;
+    max-width: 340px;
+    min-height: calc(100vh - 80px); /* Altura da tela menos a navbar */
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-bottom: 5rem; /* Espaço extra para a navegação */
+}
+
+.roll-title {
+    color: #ffb347;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.roll-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.roll-control-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    color: #f5f5f5;
+    width: 100%;
+}
+
+.roll-select, .roll-input {
+    background: #232526;
+    color: #ffb347;
+    border: 1.5px solid #bfa046;
+    border-radius: 7px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    min-width: 100px;
+}
+
+.roll-input {
+    width: 80px;
+    text-align: center;
+}
+
+.roll-button {
+    background: #ffb347;
+    color: #232526;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+.roll-button:hover:not(:disabled) {
+    background: #ffa327;
+    transform: translateY(-1px);
+}
+
+.roll-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.dice-animation-container {
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.roll-result {
+    background: rgba(34,27,19,0.9);
+    border: 2px solid #bfa046;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.roll-result-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: #ffb347;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.roll-result-sum {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-top: 1px solid rgba(255,179,71,0.3);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .roll-page-container {
+        padding: 0.8rem;
+    }
+    
+    .roll-title {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .roll-button {
+        padding: 0.7rem;
+    }
+    
+    .roll-result-values {
+        font-size: 1.2rem;
+    }
+}
