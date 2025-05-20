@@ -5,6 +5,7 @@ import SpellsPage from '../pages/SpellsPage';
 import MonstersPage from '../pages/MonstersPage';
 import CharactersPage from '../pages/CharactersPage';
 import MorePage from '../pages/MorePage';
+import { SpellsProvider } from '../context/SpellsContext';
 import '../styles/App.css';
 
 const pages = [
@@ -20,7 +21,7 @@ const App: React.FC = () => {
     const current = pages.find(p => p.key === currentPage);
 
     return (
-        <>
+        <SpellsProvider>
             <img
                 className="background-dragon"
                 src="https://sm.ign.com/ign_pt/feature/e/every-drag/every-dragon-in-game-of-thrones-house-of-the-dragon_zmfu.jpg" 
@@ -40,7 +41,7 @@ const App: React.FC = () => {
                     setCurrentPage={setCurrentPage}
                 />
             </div>
-        </>
+        </SpellsProvider>
     );
 };
 

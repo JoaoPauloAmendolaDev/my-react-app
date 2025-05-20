@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import SpellModal from '../components/SpellModal';
 import '../styles/SpellsPage.css';
 import { useDnDAPI, Spell } from '../hooks/useDnDAPI';
+import { useSpells } from '../context/SpellsContext';
 
 const SpellsPage: React.FC = () => {
   const { fetchSpells, fetchSpellDetails, formatSpell } = useDnDAPI();
+  const { spells, setSpells, isLoading, setIsLoading } = useSpells();
   const [spellsByCircle, setSpellsByCircle] = useState<{ [level: number]: Spell[] }>({});
   const [selectedSpell, setSelectedSpell] = useState<Spell | null>(null);
-  const [loading, setLoading] = useState(true);
   const [modalLoading, setModalLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedCircle, setSelectedCircle] = useState<'all' | number>('all');
@@ -21,7 +22,6 @@ const SpellsPage: React.FC = () => {
         .flatMap(spell => spell.classes.map(c => c.name))
     )
   ).sort();
-
 
   // Função para adaptar o spell da API para o formato do SpellModal
   const adaptSpellForModal = (spell: Spell | null) => {
@@ -41,29 +41,54 @@ const SpellsPage: React.FC = () => {
 
   useEffect(() => {
     const loadSpells = async () => {
-      setLoading(true);
+      // Se já temos magias no contexto, apenas organize por círculo
+      if (spells.length > 0) {
+        const byCircle: { [level: number]: Spell[] } = {};
+        spells.forEach(spell => {
+          if (!byCircle[spell.level]) byCircle[spell.level] = [];
+          byCircle[spell.level].push(spell);
+        });
+        // Ordenar alfabeticamente dentro de cada círculo
+        Object.keys(byCircle).forEach(level => {
+          byCircle[Number(level)] = byCircle[Number(level)].sort((a, b) => 
+            a.name.localeCompare(b.name)
+          );
+        });
+        setSpellsByCircle(byCircle);
+        setIsLoading(false);
+        return;
+      }
+
+      // Se não temos magias no contexto, carregue-as
+      setIsLoading(true);
       const spellList = await fetchSpells();
-      // Buscar detalhes de cada magia (limitando para evitar excesso de requisições)
       const detailsPromises = spellList.map((s: any) => fetchSpellDetails(s.index));
       const details = await Promise.all(detailsPromises);
-      // Filtrar magias válidas e formatar
       const formatted = details.filter(Boolean).map(formatSpell);
-      // Organizar por nível
+      
+      // Armazene no contexto
+      setSpells(formatted);
+      
+      // Organize por círculo
       const byCircle: { [level: number]: Spell[] } = {};
       formatted.forEach(spell => {
         if (!byCircle[spell.level]) byCircle[spell.level] = [];
         byCircle[spell.level].push(spell);
       });
-      // Ordenar alfabeticamente dentro de cada círculo
+      
+      // Ordene alfabeticamente dentro de cada círculo
       Object.keys(byCircle).forEach(level => {
-        byCircle[Number(level)] = byCircle[Number(level)].sort((a, b) => a.name.localeCompare(b.name));
+        byCircle[Number(level)] = byCircle[Number(level)].sort((a, b) => 
+          a.name.localeCompare(b.name)
+        );
       });
+      
       setSpellsByCircle(byCircle);
-      setLoading(false);
+      setIsLoading(false);
     };
+    
     loadSpells();
-    // eslint-disable-next-line
-  }, []);
+  }, [fetchSpells, fetchSpellDetails, formatSpell, setSpells, setIsLoading, spells]);
 
   // Obter todos os círculos disponíveis ordenados
   const circles = Object.keys(spellsByCircle)
@@ -76,7 +101,6 @@ const SpellsPage: React.FC = () => {
     const circlesToShow = selectedCircle === 'all' ? circles : [selectedCircle];
     circlesToShow.forEach(level => {
       filtered[level] = (spellsByCircle[level] || []).filter(spell => {
-        // Busca por nome em português e inglês
         const matchesName = spell.name.toLowerCase().includes(search.toLowerCase());
         const matchesClass = selectedClass === 'all' || spell.classes.some(c => c.name === selectedClass);
         return matchesName && matchesClass;
@@ -125,7 +149,7 @@ const SpellsPage: React.FC = () => {
           ))}
         </select>
       </div>
-      {loading ? (
+      {isLoading ? (
         <div style={{ textAlign: 'center', marginTop: 40 }}>Carregando magias...</div>
       ) : (
         <div className="spells-circles-grid">
